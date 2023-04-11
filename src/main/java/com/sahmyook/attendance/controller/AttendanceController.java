@@ -10,4 +10,7 @@ public class AttendanceController {
 
     @GetMapping("/admin")
     public String admin(){return "/admin";}
+
+
+
 }

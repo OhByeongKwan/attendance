@@ -15,8 +15,11 @@
             <input name="status" type="hidden" value="0">
 
             <button id="signUp" type="button" onclick="addUser()">가입</button>
+
+            <button id="singIn" type="button" onclick="loginUser()">로그인</button>
         </form>
     </div>
+
 </main>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -25,6 +28,9 @@
 <script src="/js/axios.js"></script>
 <script>
     Dialog.init();
+    AJAX.get('api/admins').then(function (res){
+        console.log(res);
+    })
     function addUser(){
         let formData = new FormData(document.querySelector('#addUser'));
         let vdata = Utils.formToObject(formData);
@@ -33,7 +39,16 @@
             Dialog.alert(res.message,Page.reload);
         });
     }
-    //test
+
+    function loginUser(){
+        let formData = new FormData(document.querySelector('#addUser'));
+        let vdata = Utils.formToObject(formData);
+        console.log(vdata);
+        AJAX.post('/api/admins/login',formData).then(function (res){
+            Dialog.alert(res.message,Page.reload);
+        });
+    }
+
 </script>
 </body>
 </html>

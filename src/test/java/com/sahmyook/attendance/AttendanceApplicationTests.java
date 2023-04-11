@@ -8,6 +8,7 @@ class AttendanceApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

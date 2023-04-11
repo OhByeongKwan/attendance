@@ -24,4 +24,15 @@ public class AdminApiController {
         public ResultCode addUser(@ModelAttribute AddUser addUser){
             return userService.save(addUser);
         }
+
+
+    @PostMapping("/login")
+    public ResultCode loginUser(@ModelAttribute User loginUser){
+        return userService.login(loginUser);
+    }
+
+    @PutMapping("/change")
+    public ResultCode changeStatus(@ModelAttribute User user){
+        return userService.changeStatus(user);
+    }
 }

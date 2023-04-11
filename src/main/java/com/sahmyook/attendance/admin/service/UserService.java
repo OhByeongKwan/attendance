@@ -32,4 +32,30 @@ public class UserService {
             return new ResultCode(0, "새 아이디를 생성하였습니다.");
         }
     }
+
+    public ResultCode login(User loginUser){
+        if(userRepository.existsByUserId(loginUser.getUserId())){
+            User users = userRepository.findByUserId(loginUser.getUserId());
+            if(users.getUserPw().equals(loginUser.getUserPw())){
+                return new ResultCode(0, "로그인 성공!");
+            }
+            else{
+                return new ResultCode(-99, "비밀번호가 틀립니다.");
+            }
+        }else {
+            return new ResultCode(-99, "존재하지 않는 아이디입니다.");
+        }
+    }
+
+    public ResultCode changeStatus(User onUser) {
+        if (userRepository.existsByUserId(onUser.getUserId())) {
+            User user = userRepository.findByUserId(onUser.getUserId());
+            if (user.getStatus()==1) user.setStatus(0);
+            else user.setStatus(1);
+            userRepository.save(user);
+            return new ResultCode(0, "출근 성공!");
+        } else {
+            return new ResultCode(-99, "존재하지 않는 아이디입니다.");
+        }
+    }
 }
