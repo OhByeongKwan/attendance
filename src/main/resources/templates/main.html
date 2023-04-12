@@ -2,15 +2,36 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <title>Document</title>
+    <title>메인 화면</title>
 </head>
 <body>
-
+    <h1>안녕하세요.</h1>
+    <hr>
+    <button id="on" type="button" onclick="on()">출근</button>
+    <button id="off" type="button" onclick="off()">퇴근</button>
+    <hr>
+    <a href="/logout">로그아웃 하기</a>
+    <a href="/admin">관리자 모드</a>
 
 
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrap.bundle.js"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/axios.js"></script>
+    <script>
+        Dialog.init();
+        function on(){
+            AJAX.put('/api/admins/on').then(function (res){
+                Dialog.alert(res.message,Page.reload);
+            });
+        }
+        function off(){
+            AJAX.put('/api/admins/off').then(function (res){
+                Dialog.alert(res.message,Page.reload);
+            });
+        }
+    </script>
 </body>
 </html>

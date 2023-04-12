@@ -6,6 +6,8 @@ import com.sahmyook.attendance.admin.service.UserService;
 import com.sahmyook.attendance.global.domain.ResultCode;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,17 +24,22 @@ public class AdminApiController {
 
     @PostMapping("/add")
         public ResultCode addUser(@ModelAttribute AddUser addUser){
-            return userService.save(addUser);
+        return userService.save(addUser);
         }
 
-
-    @PostMapping("/login")
-    public ResultCode loginUser(@ModelAttribute User loginUser){
-        return userService.login(loginUser);
+    @PutMapping("/on")
+    public ResultCode on(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String userId = ((UserDetails) principal).getUsername();
+        return userService.on(userId);
     }
 
-    @PutMapping("/change")
-    public ResultCode changeStatus(@ModelAttribute User user){
-        return userService.changeStatus(user);
+    @PutMapping("/off")
+    public ResultCode off(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        String userId = ((UserDetails) principal).getUsername();
+        return userService.off(userId);
     }
 }

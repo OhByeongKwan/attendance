@@ -22,4 +22,6 @@ public class User {
     private String userPw;
 
     private Integer status;
+
+    private String role;
 }
