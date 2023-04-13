@@ -36,7 +36,7 @@ public class UserService {
             user.setUserPw(bCryptPasswordEncoder.encode(rawPassword));
             //user.setUserPw(addUser.getUserPw());
             user.setStatus(addUser.getStatus());
-            user.setRole("USER");
+            user.setRole("ROLE_USER");
 
             userRepository.save(user);
             return new ResultCode(0, "새 아이디를 생성하였습니다.");

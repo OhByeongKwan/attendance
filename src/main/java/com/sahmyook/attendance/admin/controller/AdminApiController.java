@@ -30,16 +30,16 @@ public class AdminApiController {
     @PutMapping("/on")
     public ResultCode on(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = (UserDetails)principal;
-        String userId = ((UserDetails) principal).getUsername();
+        UserDetails userDetails = (UserDetails) principal;
+        String userId = userDetails.getUsername();
         return userService.on(userId);
     }
 
     @PutMapping("/off")
     public ResultCode off(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = (UserDetails)principal;
-        String userId = ((UserDetails) principal).getUsername();
+        UserDetails userDetails = (UserDetails) principal;
+        String userId = userDetails.getUsername();
         return userService.off(userId);
     }
 }

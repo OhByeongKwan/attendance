@@ -5,6 +5,7 @@
     <title>메인 화면</title>
 </head>
 <body>
+<div class="container">
     <h1>안녕하세요.</h1>
     <hr>
     <button id="on" type="button" onclick="on()">출근</button>
@@ -12,6 +13,8 @@
     <hr>
     <a href="/logout">로그아웃 하기</a>
     <a href="/admin">관리자 모드</a>
+</div>
+
 
 
 
@@ -21,14 +24,18 @@
     <script src="/js/core.js"></script>
     <script src="/js/axios.js"></script>
     <script>
-        Dialog.init();
+        $(document).ready(()=>{
+            Dialog.init();
+        })
         function on(){
             AJAX.put('/api/admins/on').then(function (res){
+                console.log(res);
                 Dialog.alert(res.message,Page.reload);
             });
         }
         function off(){
             AJAX.put('/api/admins/off').then(function (res){
+                console.log(res);
                 Dialog.alert(res.message,Page.reload);
             });
         }
