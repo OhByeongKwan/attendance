@@ -1,15 +1,34 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/core.css">
     <title>메인 화면</title>
+    <style>
+        .title-box{height:20%;background-color:#31D28F;border-radius:0 0 50px 50px;padding-top:40px}
+        .go-home,.go-work{height:216px;border-radius:10px;background-color:#F5F5F5;padding:25px 20px}
+        #on.active{background-color:#31D28F!important;border:none!important}
+        #off.active{background-color:#FFB800!important;border:none!important}
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1>안녕하세요.</h1>
-    <hr>
-    <button id="on" type="button" onclick="on()">출근</button>
-    <button id="off" type="button" onclick="off()">퇴근</button>
+<div class="mobile-container">
+    <div class="title-box">
+        <div style="padding:20px 30px">
+            <span style="font-size:20px;font-weight:bolder">나의 출퇴근 기록</span>
+        </div>
+    </div>
+    <div class="attendance" style="padding:26px 30px 16px">
+        <div class="go-work d-flex flex-column" style="font-size:22px;font-weight:bolder">
+            안녕하세요 OBK님<br>출근하시겠어요?
+            <button id="on" class="btn" type="button" onclick="on()" style="margin-top: 35px;border:3px solid #31D2A8;background-color:#E8FFF9"><span>출근합니다.</span></button>
+        </div>
+        <div class="go-home d-flex flex-column" style="margin-top:10px;font-size:22px;font-weight:bolder">
+                OBK님<br>출근하시겠어요?
+            <button id="off" class="btn" type="button" onclick="off()" style="margin-top: 35px;border:3px solid #FFB800;background-color:#FFF3D4"><span>퇴근합니다.</span></button>
+        </div>
+    </div>
     <hr>
     <a href="/logout">로그아웃 하기</a>
     <a href="/admin">관리자 모드</a>
@@ -30,14 +49,37 @@
         function on(){
             AJAX.put('/api/admins/on').then(function (res){
                 console.log(res);
-                Dialog.alert(res.message,Page.reload);
+                Dialog.alert(res.message);
+
+                status(res.data);
             });
         }
         function off(){
             AJAX.put('/api/admins/off').then(function (res){
                 console.log(res);
-                Dialog.alert(res.message,Page.reload);
+                Dialog.alert(res.message);
+
+                status(res.data);
             });
+        }
+        function status(data){
+            if(data == 1){
+                console.log(data);
+                $('#off').removeClass('active');
+                $('#on').addClass('active');
+                $('#on span').remove();
+                $('#on').append('<span>출근중</span>');
+                $('#off span').remove();
+                $('#off').append('<span>퇴근합니다.</span>');
+            }else{
+                console.log(data);
+                $('#on').removeClass('active');
+                $('#off').addClass('active');
+                $('#on span').remove();
+                $('#on').append('<span>출근합니다.</span>');
+                $('#off span').remove();
+                $('#off').append('<span>퇴근중</span>');
+            }
         }
     </script>
 </body>

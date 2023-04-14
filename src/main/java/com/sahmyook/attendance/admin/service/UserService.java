@@ -47,11 +47,11 @@ public class UserService {
     public ResultCode on(String userId) {
         if (userRepository.existsByUserId(userId)) {
             User user = userRepository.findByUserId(userId);
-            if (user.getStatus()==1) return new ResultCode(-99, "이미 출근한 상태입니다.");
+            if (user.getStatus()==1) return new ResultCode(-99, "이미 출근한 상태입니다.",user.getStatus());
             else {
                 user.setStatus(1);
                 userRepository.save(user);
-                return new ResultCode(0, "출근을 완료하였습니다.");
+                return new ResultCode(0, "출근을 완료하였습니다.",user.getStatus());
             }
         } else {
             return new ResultCode(-99, "존재하지 않는 아이디입니다. 관리자에게 문의해주세요.");
@@ -61,11 +61,11 @@ public class UserService {
     public ResultCode off(String userId) {
         if (userRepository.existsByUserId(userId)) {
             User user = userRepository.findByUserId(userId);
-            if (user.getStatus()==0) return new ResultCode(-99, "이미 퇴근한 상태입니다.");
+            if (user.getStatus()==0) return new ResultCode(-99, "이미 퇴근한 상태입니다.",user.getStatus());
             else {
                 user.setStatus(0);
                 userRepository.save(user);
-                return new ResultCode(0, "퇴근을 완료하였습니다.");
+                return new ResultCode(0, "퇴근을 완료하였습니다.",user.getStatus());
             }
         } else {
             return new ResultCode(-99, "존재하지 않는 아이디입니다. 관리자에게 문의해주세요.");
