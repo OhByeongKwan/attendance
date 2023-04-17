@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.access.expression.SecurityExpressionOperations.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 
 @Configuration
 @EnableWebSecurity
@@ -34,7 +37,18 @@ public class SecurityConfig {
                 .usernameParameter("userId")
                 .passwordParameter("userPw")
                 .loginProcessingUrl("/loginProc")
-                .defaultSuccessUrl("/main");
+                .defaultSuccessUrl("/main")
+                .successHandler((request, response, authentication) -> {
+                    for (GrantedAuthority auth : authentication.getAuthorities()) {
+                        if ("ROLE_ADMIN".equals(auth.getAuthority())) {
+                            response.sendRedirect("/admin");
+                            return;
+                        }
+                    }
+                    response.sendRedirect("/main");
+                });
+
+
 
 
 /*
