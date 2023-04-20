@@ -44,35 +44,36 @@
     <script src="/js/axios.js"></script>
     <script>
         $(document).ready(()=>{
+
             Dialog.init();
+            status();
+
         })
         function on(){
             AJAX.put('/api/admins/on').then(function (res){
                 console.log(res);
                 Dialog.alert(res.message);
+            }).then((res) => status());
 
-                status(res.data);
-            });
         }
         function off(){
             AJAX.put('/api/admins/off').then(function (res){
                 console.log(res);
                 Dialog.alert(res.message);
+            }).then((res) => status());
 
-                status(res.data);
-            });
         }
-        function status(data){
+        async function status(){
+            let data = await AJAX.get('api/admins/getStatus');
+            console.log(data);
             if(data == 1){
-                console.log(data);
                 $('#off').removeClass('active');
                 $('#on').addClass('active');
                 $('#on span').remove();
                 $('#on').append('<span>출근중</span>');
                 $('#off span').remove();
                 $('#off').append('<span>퇴근합니다.</span>');
-            }else{
-                console.log(data);
+            }else if (data == 0){
                 $('#on').removeClass('active');
                 $('#off').addClass('active');
                 $('#on span').remove();

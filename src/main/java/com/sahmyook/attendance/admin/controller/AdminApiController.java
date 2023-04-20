@@ -42,4 +42,12 @@ public class AdminApiController {
         String userId = userDetails.getUsername();
         return userService.off(userId);
     }
+
+    @GetMapping("/getStatus")
+    public Integer getStatus(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        String userId = userDetails.getUsername();
+        return userService.getStatus(userId);
+    }
 }

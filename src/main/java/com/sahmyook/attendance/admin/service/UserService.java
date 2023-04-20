@@ -71,4 +71,14 @@ public class UserService {
             return new ResultCode(-99, "존재하지 않는 아이디입니다. 관리자에게 문의해주세요.");
         }
     }
+
+    public Integer getStatus(String userId) {
+        if (userRepository.existsByUserId(userId)) {
+            User user = userRepository.findByUserId(userId);
+            System.out.println(user.getStatus());
+            return user.getStatus();
+        } else {
+            return -99;
+        }
+    }
 }
