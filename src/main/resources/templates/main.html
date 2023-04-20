@@ -22,11 +22,11 @@
     <div class="attendance" style="padding:26px 30px 16px">
         <div class="go-work d-flex flex-column" style="font-size:22px;font-weight:bolder">
             안녕하세요 OBK님<br>출근하시겠어요?
-            <button id="on" class="btn" type="button" onclick="on()" style="margin-top: 35px;border:3px solid #31D2A8;background-color:#E8FFF9"><span>출근합니다.</span></button>
+            <button id="on" class="btn" type="button" onclick="on()" style="margin-top: 35px;border:3px solid #31D2A8;background-color:#E8FFF9;color:black"><span>출근합니다.</span></button>
         </div>
         <div class="go-home d-flex flex-column" style="margin-top:10px;font-size:22px;font-weight:bolder">
                 OBK님<br>출근하시겠어요?
-            <button id="off" class="btn" type="button" onclick="off()" style="margin-top: 35px;border:3px solid #FFB800;background-color:#FFF3D4"><span>퇴근합니다.</span></button>
+            <button id="off" class="btn" type="button" onclick="off()" style="margin-top: 35px;border:3px solid #FFB800;background-color:#FFF3D4;color:black"><span>퇴근합니다.</span></button>
         </div>
     </div>
     <hr>
@@ -53,14 +53,14 @@
             AJAX.put('/api/admins/on').then(function (res){
                 console.log(res);
                 Dialog.alert(res.message);
-            }).then((res) => status());
+            }).then(() => status());
 
         }
         function off(){
             AJAX.put('/api/admins/off').then(function (res){
                 console.log(res);
                 Dialog.alert(res.message);
-            }).then((res) => status());
+            }).then(() => status());
 
         }
         async function status(){
@@ -71,15 +71,19 @@
                 $('#on').addClass('active');
                 $('#on span').remove();
                 $('#on').append('<span>출근중</span>');
+                $('#on')[0].disabled = true;
                 $('#off span').remove();
                 $('#off').append('<span>퇴근합니다.</span>');
+                $('#off')[0].disabled = false;
             }else if (data == 0){
                 $('#on').removeClass('active');
                 $('#off').addClass('active');
                 $('#on span').remove();
                 $('#on').append('<span>출근합니다.</span>');
+                $('#on')[0].disabled = false;
                 $('#off span').remove();
                 $('#off').append('<span>퇴근중</span>');
+                $('#off')[0].disabled = true;
             }
         }
     </script>
