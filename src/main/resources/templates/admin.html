@@ -46,7 +46,7 @@
         let vdata = Utils.formToObject(formData);
         console.log(vdata);
         AJAX.post('/api/admins/add',formData).then(function (res){
-            Dialog.alert(res.message,Page.reload());
+            Dialog.alert(res.message,Page.reload);
         });
     }
 
