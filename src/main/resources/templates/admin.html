@@ -6,9 +6,11 @@
     <link rel="stylesheet" type="text/css" href="/css/core.css">
     <title>근태관리</title>
     <style>
-        #signupForm{background-color:white;padding:20px;border-radius:50px 50px 0 0;position:absolute;bottom:0;left:0;right:0;width:100%;height:70%}
+        #signupForm{background-color:white;padding:20px;border-radius:50px 50px 0 0;position:absolute;bottom:0;left:0;right:0;width:100%;height:70%;max-width: 768px;margin-left: auto;margin-right: auto}
         .title{font-size:36px;font-weight:bold;margin-top:36px}
-        #addUser input{background-color:#F5F5F5;padding:14px}
+        #addUser input{background-color:#F5F5F5;padding:14px 0 14px 73px}
+        #userId{background-image:url(/image/id_icon.svg);background-repeat:no-repeat;background-position:38px center}
+        #userPw{background-image:url(/image/pw_icon.svg);background-repeat:no-repeat;background-position:43px center}
     </style>
 </head>
 <body style="background-color:#FFB800">
@@ -39,11 +41,12 @@
     });
 
     function addUser(){
+        console.log(document.querySelector('#addUser'));
         let formData = new FormData(document.querySelector('#addUser'));
         let vdata = Utils.formToObject(formData);
         console.log(vdata);
         AJAX.post('/api/admins/add',formData).then(function (res){
-            Dialog.alert(res.message,Page.reload);
+            Dialog.alert(res.message,Page.reload());
         });
     }
 

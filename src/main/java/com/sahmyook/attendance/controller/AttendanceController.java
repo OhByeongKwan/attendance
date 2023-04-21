@@ -20,6 +20,9 @@ public class AttendanceController {
     public String login(){return "/login";}
 
     @GetMapping("/main")
-    public String user(){return "/main";}
+    public String main(){return "/main";}
+
+    @GetMapping("/main2")
+    public String main2(){return "/main2";}
 
 }

@@ -10,13 +10,15 @@
         .go-home,.go-work{height:216px;border-radius:10px;background-color:#F5F5F5;padding:25px 20px}
         #on.active{background-color:#31D28F!important;border:none!important}
         #off.active{background-color:#FFB800!important;border:none!important}
+        footer{position:absolute;bottom:0;width:100%;height:85px;background-image:url(/image/footer.svg);background-repeat:no-repeat;background-size:cover;max-width: 768px;margin-left: auto;margin-right: auto}
     </style>
 </head>
 <body>
 <div class="mobile-container">
     <div class="title-box">
-        <div style="padding:20px 30px">
+        <div class="d-flex justify-content-between" style="padding:20px 30px">
             <span style="font-size:20px;font-weight:bolder">나의 출퇴근 기록</span>
+            <div onclick="Page.go('/logout')" style="width:30px"><img src="/image/logout.svg"></div>
         </div>
     </div>
     <div class="attendance" style="padding:26px 30px 16px">
@@ -25,13 +27,16 @@
             <button id="on" class="btn" type="button" onclick="on()" style="margin-top: 35px;border:3px solid #31D2A8;background-color:#E8FFF9;color:black"><span>출근합니다.</span></button>
         </div>
         <div class="go-home d-flex flex-column" style="margin-top:10px;font-size:22px;font-weight:bolder">
-                OBK님<br>출근하시겠어요?
+                OBK님<br>퇴근하시겠어요?
             <button id="off" class="btn" type="button" onclick="off()" style="margin-top: 35px;border:3px solid #FFB800;background-color:#FFF3D4;color:black"><span>퇴근합니다.</span></button>
         </div>
     </div>
-    <hr>
-    <a href="/logout">로그아웃 하기</a>
-    <a href="/admin">관리자 모드</a>
+    <footer>
+        <div style="display: flex;justify-content:space-around;margin-top: 20px;gap: 80px;">
+            <div role="button"><img src="/image/home_active.svg"></div>
+            <div role="button" onclick="Page.go('/main2')"><img src="/image/attendances.svg"></div>
+        </div>
+    </footer>
 </div>
 
 
