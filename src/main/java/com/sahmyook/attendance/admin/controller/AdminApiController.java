@@ -28,7 +28,7 @@ public class AdminApiController {
         return userService.save(addUser);
         }
 
-    @PostMapping("/edit")
+    @PutMapping ("/edit")
     public ResultCode editUser(@ModelAttribute EditUser editUser){
         return userService.edit(editUser);
     }

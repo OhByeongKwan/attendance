@@ -66,10 +66,16 @@
 
         function edit(){
             let formData = new FormData(document.querySelector('#editInfo'));
-
-            AJAX.post('/api/admins/edit', formData).then(function (res) {
-                Dialog.alert(res.message, Page.back);
-            });
+            let vdata = Utils.formToObject(formData);
+            if (vdata.userPw != vdata.userPw2){
+                Dialog.alert("비밀번호가 일치하지 않습니다.",()=>{
+                    $('input[name=userPw]').focus();
+                });
+            }else{
+                AJAX.put('/api/admins/edit', formData).then(function (res) {
+                    Dialog.alert(res.message,Page.back);
+                });
+            }
         }
     </script>
 </body>
