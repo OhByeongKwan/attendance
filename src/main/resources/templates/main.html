@@ -14,6 +14,8 @@
         footer{position:absolute;bottom:0;width:100%;height:85px;background-image:url(/image/footer.svg);background-repeat:no-repeat;background-size:cover;max-width: 768px;margin-left: auto;margin-right: auto}
         .attendance{height:calc(80% - 115px)}
         .ri-settings-3-line{position:absolute;font-size:30px;top:5px;right: 12px;color:#4b4b4b}
+        .go-work div .position-relative:after{content:"";width:38px;height:10px;background-color:#31D28F;display:block;position:absolute;bottom:-2px;z-index:-1}
+        .go-home div .position-relative:after{content:"";width:38px;height:10px;background-color:#FFB800;display:block;position:absolute;bottom:-2px;z-index:-1}
     </style>
 </head>
 <body>
@@ -26,12 +28,12 @@
     </div>
     <div class="attendance" style="padding:26px 30px 16px">
         <div class="go-work d-flex flex-column justify-content-around" style="font-size:22px;font-weight:bolder">
-            안녕하세요 OBK님<br>출근하시겠어요?
-            <button id="on" class="btn" type="button" onclick="on()" style="border:3px solid #31D2A8;background-color:#E8FFF9;color:black"><span>출근합니다.</span></button>
+            <div><span class="user-name">안녕하세요 OBK님</span><br><span class="position-relative" style="z-index:0">출근하시겠어요?</span></div>
+            <button id="on" class="btn fw-bold" type="button" onclick="on()" style="border:3px solid #31D2A8;background-color:#E8FFF9"><span>출근합니다.</span></button>
         </div>
         <div class="go-home d-flex flex-column justify-content-around" style="margin-top:10px;font-size:22px;font-weight:bolder">
-                OBK님<br>퇴근하시겠어요?
-            <button id="off" class="btn" type="button" onclick="off()" style="border:3px solid #FFB800;background-color:#FFF3D4;color:black"><span>퇴근합니다.</span></button>
+            <div><span class="user-name">OBK님</span><br><span class="position-relative" style="z-index:0">퇴근하시겠어요?</span></div>
+            <button id="off" class="btn fw-bold" type="button" onclick="off()" style="border:3px solid #FFB800;background-color:#FFF3D4"><span>퇴근합니다.</span></button>
         </div>
     </div>
     <footer>
@@ -56,11 +58,15 @@
     <script src="/js/axios.js"></script>
     <script>
         $(document).ready(()=>{
-
+            AJAX.get('/api/admins/getOne').then((res)=>{
+                $('.go-work .user-name').remove();
+                $('.go-home .user-name').remove();
+                $('.go-work>div').prepend(`<span class="user-name">안녕하세요 ${res.userName}님</span>`);
+                $('.go-home>div').prepend(`<span class="user-name">안녕하세요 ${res.userName}님</span>`);
+            });
             Dialog.init();
             status();
-
-        })
+        });
         function on(){
             AJAX.put('/api/admins/on').then(function (res){
                 console.log(res);

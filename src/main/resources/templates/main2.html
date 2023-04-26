@@ -84,12 +84,12 @@
                for(const item of res){
                    if(item.status == 0){
                        $('#content').append(`<div class="d-flex justify-content-between align-items-center" style="padding:9px 20px;background-color:#F5F5F5;border-radius:10px">
-                <span class="fs-20 fw-bold userId">${item.userId}</span>
+                <span class="fs-20 fw-bold userId">${item.userName}</span>
                 <div class="fw-bolder go-home" style="padding:3px 16px;background-color:#FFB800;border-radius:10px;color:white">퇴근</div>
             </div>`);
                    }else{
                        $('#content').append(`<div class="d-flex justify-content-between align-items-center" style="padding:9px 20px;background-color:#F5F5F5;border-radius:10px">
-                <span class="fs-20 fw-bold userId">${item.userId}</span>
+                <span class="fs-20 fw-bold userId">${item.userName}</span>
                 <div class="fw-bolder working" style="padding:3px 16px;background-color:#31D28F;border-radius:10px;color:white">출근</div>
             </div>`);
                    }
@@ -106,6 +106,7 @@
                     for(const item of content){
                         $(item).removeClass('hide');
                     }
+                    status = '전체';
                     break;
                 }
                 case 'working' : {
