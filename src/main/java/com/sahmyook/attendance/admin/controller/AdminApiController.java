@@ -1,6 +1,7 @@
 package com.sahmyook.attendance.admin.controller;
 
 import com.sahmyook.attendance.admin.domain.AddUser;
+import com.sahmyook.attendance.admin.domain.EditUser;
 import com.sahmyook.attendance.admin.domain.User;
 import com.sahmyook.attendance.admin.service.UserService;
 import com.sahmyook.attendance.global.domain.ResultCode;
@@ -27,6 +28,11 @@ public class AdminApiController {
         return userService.save(addUser);
         }
 
+    @PostMapping("/edit")
+    public ResultCode editUser(@ModelAttribute EditUser editUser){
+        return userService.edit(editUser);
+    }
+
     @PutMapping("/on")
     public ResultCode on(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -49,5 +55,13 @@ public class AdminApiController {
         UserDetails userDetails = (UserDetails) principal;
         String userId = userDetails.getUsername();
         return userService.getStatus(userId);
+    }
+
+    @GetMapping("/getOne")
+    public User getOne(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails) principal;
+        String userId = userDetails.getUsername();
+        return userService.getOne(userId);
     }
 }
