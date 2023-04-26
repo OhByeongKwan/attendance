@@ -46,7 +46,18 @@ public class SecurityConfig {
                         }
                     }
                     response.sendRedirect("/main");
-                });
+                })
+                .failureHandler(((request, response, exception) -> {
+                    String username=request.getParameter("userId");
+                    String password=request.getParameter("userPw");
+                    if(username==null || password==null || username.trim().isEmpty() || password.trim().isEmpty()) {
+                        response.sendRedirect(("/login"));
+                    } else {
+                        response.sendRedirect("/login?error");
+                    }
+                }));
+
+
 
 
 
