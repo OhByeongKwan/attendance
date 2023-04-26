@@ -1,7 +1,9 @@
 package com.sahmyook.attendance.admin.domain;
 
+import jakarta.persistence.GeneratedValue;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
@@ -9,6 +11,5 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 @DynamicInsert
 public class AddUser {
     private String userId;
-    private String userPw;
     private Integer status;
 }

@@ -25,4 +25,7 @@ public class AttendanceController {
     @GetMapping("/main2")
     public String main2(){return "/main2";}
 
+    @GetMapping("/myInfo")
+    public String myInfo(){return "/myInfo";}
+
 }

@@ -2,6 +2,7 @@ package com.sahmyook.attendance.admin.service;
 
 import com.sahmyook.attendance.admin.dao.UserRepository;
 import com.sahmyook.attendance.admin.domain.AddUser;
+import com.sahmyook.attendance.admin.domain.EditUser;
 import com.sahmyook.attendance.admin.domain.User;
 import com.sahmyook.attendance.global.domain.ResultCode;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -22,7 +24,6 @@ public class UserService {
     public List<User> getAll(){return userRepository.findAll();}
 
     public ResultCode save(AddUser addUser){
-
         if(userRepository.existsByUserId(addUser.getUserId())){
             return new ResultCode(-99, "중복된 아이디 입니다.");
         }else {
@@ -31,12 +32,12 @@ public class UserService {
 
             user.setUserId(addUser.getUserId());
 
-            String rawPassword = addUser.getUserPw();
+            String rawPassword = "0000";
 
             user.setUserPw(bCryptPasswordEncoder.encode(rawPassword));
-            //user.setUserPw(addUser.getUserPw());
             user.setStatus(addUser.getStatus());
             user.setRole("ROLE_USER");
+            user.setUserName(addUser.getUserId());
 
             userRepository.save(user);
             return new ResultCode(0, "새 아이디를 생성하였습니다.");
@@ -61,6 +62,7 @@ public class UserService {
     public ResultCode off(String userId) {
         if (userRepository.existsByUserId(userId)) {
             User user = userRepository.findByUserId(userId);
+
             if (user.getStatus()==0) return new ResultCode(-99, "이미 퇴근한 상태입니다.",user.getStatus());
             else {
                 user.setStatus(0);
@@ -79,6 +81,35 @@ public class UserService {
             return user.getStatus();
         } else {
             return -99;
+        }
+    }
+
+    public User getOne(String userId) {
+        if (userRepository.existsByUserId(userId)) {
+            User user = userRepository.findByUserId(userId);
+            System.out.println(user.getUserId());
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    public ResultCode edit(EditUser editUser) {
+        Optional<User> user = userRepository.findById(editUser.getId());
+
+        if(user.isPresent()) {
+            User oldUser = user.get();
+            oldUser.setUserId(editUser.getUserId());
+
+            String rawPassword = editUser.getUserPw();
+            oldUser.setUserPw(bCryptPasswordEncoder.encode(rawPassword));
+
+            oldUser.setUserName(editUser.getUserName());
+
+            return new ResultCode(0, "회원 정보를 수정했습니다.");
+        }
+        else {
+            return new ResultCode(-99, "에러");
         }
     }
 }
