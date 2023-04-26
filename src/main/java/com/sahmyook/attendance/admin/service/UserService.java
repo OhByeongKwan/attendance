@@ -24,9 +24,14 @@ public class UserService {
     public List<User> getAll(){return userRepository.findAll();}
 
     public ResultCode save(AddUser addUser){
+        if(addUser ==null || addUser.getUserId().isEmpty() || addUser.getUserPw().isEmpty()) {
+            return new ResultCode(-99, "유효하지 않은 입력입니다.");
+        }
         if(userRepository.existsByUserId(addUser.getUserId())){
+
             return new ResultCode(-99, "중복된 아이디 입니다.");
-        }else {
+        }
+        else {
 
             User user = new User();
 
