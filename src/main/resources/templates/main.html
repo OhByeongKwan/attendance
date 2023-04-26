@@ -4,13 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/core.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
     <title>메인 화면</title>
     <style>
         .title-box{height:20%;background-color:#31D28F;border-radius:0 0 50px 50px;padding-top:40px}
-        .go-home,.go-work{height:216px;border-radius:10px;background-color:#F5F5F5;padding:25px 20px}
+        .go-home,.go-work{height:49%;border-radius:10px;background-color:#F5F5F5;padding:25px 20px}
         #on.active{background-color:#31D28F!important;border:none!important}
         #off.active{background-color:#FFB800!important;border:none!important}
         footer{position:absolute;bottom:0;width:100%;height:85px;background-image:url(/image/footer.svg);background-repeat:no-repeat;background-size:cover;max-width: 768px;margin-left: auto;margin-right: auto}
+        .attendance{height:calc(80% - 115px)}
+        .ri-settings-3-line{position:absolute;font-size:30px;top:5px;right: 12px;color:#4b4b4b}
     </style>
 </head>
 <body>
@@ -22,17 +25,21 @@
         </div>
     </div>
     <div class="attendance" style="padding:26px 30px 16px">
-        <div class="go-work d-flex flex-column" style="font-size:22px;font-weight:bolder">
+        <div class="go-work d-flex flex-column justify-content-around" style="font-size:22px;font-weight:bolder">
             안녕하세요 OBK님<br>출근하시겠어요?
-            <button id="on" class="btn" type="button" onclick="on()" style="margin-top: 35px;border:3px solid #31D2A8;background-color:#E8FFF9;color:black"><span>출근합니다.</span></button>
+            <button id="on" class="btn" type="button" onclick="on()" style="border:3px solid #31D2A8;background-color:#E8FFF9;color:black"><span>출근합니다.</span></button>
         </div>
-        <div class="go-home d-flex flex-column" style="margin-top:10px;font-size:22px;font-weight:bolder">
+        <div class="go-home d-flex flex-column justify-content-around" style="margin-top:10px;font-size:22px;font-weight:bolder">
                 OBK님<br>퇴근하시겠어요?
-            <button id="off" class="btn" type="button" onclick="off()" style="margin-top: 35px;border:3px solid #FFB800;background-color:#FFF3D4;color:black"><span>퇴근합니다.</span></button>
+            <button id="off" class="btn" type="button" onclick="off()" style="border:3px solid #FFB800;background-color:#FFF3D4;color:black"><span>퇴근합니다.</span></button>
         </div>
     </div>
     <footer>
-        <div style="display: flex;justify-content:space-around;margin-top: 20px;gap: 80px;">
+        <div class="text-center position-absolute" style="bottom:60px;left:calc(50% - 27px)">
+            <img class="setting_circle" src="/image/setting_info.svg">
+            <i class="ri-settings-3-line" onclick="Page.go('/myInfo')" style="cursor:pointer"></i>
+        </div>
+        <div style="display:flex;justify-content:space-around;margin-top: 20px;gap: 80px">
             <div role="button"><img src="/image/home_active.svg"></div>
             <div role="button" onclick="Page.go('/main2')"><img src="/image/attendances.svg"></div>
         </div>
@@ -75,7 +82,7 @@
                 $('#off').removeClass('active');
                 $('#on').addClass('active');
                 $('#on span').remove();
-                $('#on').append('<span>출근중</span>');
+                $('#on').append('<span>출근</span>');
                 $('#on')[0].disabled = true;
                 $('#off span').remove();
                 $('#off').append('<span>퇴근합니다.</span>');
@@ -87,7 +94,7 @@
                 $('#on').append('<span>출근합니다.</span>');
                 $('#on')[0].disabled = false;
                 $('#off span').remove();
-                $('#off').append('<span>퇴근중</span>');
+                $('#off').append('<span>퇴근</span>');
                 $('#off')[0].disabled = true;
             }
         }

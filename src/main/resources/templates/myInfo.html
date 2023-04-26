@@ -1,0 +1,76 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/core.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <title>메인 화면</title>
+    <style>
+        footer{position:absolute;bottom:0;width:100%;height:85px;background-image:url(/image/footer.svg);background-repeat:no-repeat;background-size:cover;max-width: 768px;margin-left: auto;margin-right: auto}
+        .ri-settings-3-line{position:absolute;font-size:30px;top:5px;right: 12px;color:#4b4b4b}
+        #userId,#userName{background-image:url(/image/id_icon.svg);background-repeat:no-repeat;background-position:38px center}
+        #userPw,#userPw2{background-image:url(/image/pw_icon.svg);background-repeat:no-repeat;background-position:43px center}
+        #editInfo input{background-color:#F5F5F5;padding:14px 0 14px 73px}
+    </style>
+</head>
+<body>
+<div class="mobile-container">
+    <div id="editForm" style="padding:20px">
+        <form id="editInfo" style="margin-top:65px">
+            <div class="d-flex flex-column gap-3">
+                <input type="hidden" id="id" name="id">
+                <label for="userName">이름</label>
+                <input class="form-control" id="userName" name="userName" placeholder="이름을 입력하세요" type="text" required />
+                <label for="userId">아이디</label>
+                <input class="form-control" id="userId" name="userId" placeholder="아이디를 입력하세요" type="text" required />
+                <label for="userPw">비밀번호</label>
+                <input class="form-control" id="userPw" name="userPw" placeholder="비밀번호를 입력하세요" type="password" required />
+                <label for="userPw2">비밀번호 재확인</label>
+                <input class="form-control" id="userPw2" name="userPw2" placeholder="비밀번호 재확인" type="password" required />
+            </div>
+
+            <button type="button" onclick="edit()" class="btn btn-outline-light" style="margin-top: 115px;background-color:#31D28F;width:100%">정보 변경</button>
+        </form>
+    </div>
+
+    <footer>
+        <div class="text-center position-absolute" style="bottom:60px;left:calc(50% - 27px)">
+            <img class="setting_circle" src="/image/setting_info.svg">
+            <i class="ri-settings-3-line" onclick="Page.go('')"></i>
+        </div>
+        <div style="display:flex;justify-content:space-around;margin-top: 20px;gap: 80px">
+            <div role="button" onclick="Page.go('/main')"><img src="/image/home.svg"></div>
+            <div role="button" onclick="Page.go('/main2')"><img src="/image/attendances.svg"></div>
+        </div>
+    </footer>
+</div>
+
+
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap.bundle.js"></script>
+    <script src="/js/core.js"></script>
+    <script src="/js/axios.js"></script>
+    <script>
+        $(document).ready(()=>{
+            Dialog.init();
+            AJAX.get("/api/admins/getOne").then((res)=>{
+                $('input[name=userName]').val(res.userName);
+                $('input[name=userId]').val(res.userId);
+                $('input[name=id]').val(res.id);
+            });
+        });
+
+        function edit(){
+            let formData = new FormData(document.querySelector('#editInfo'));
+
+            AJAX.post('/api/admins/edit', formData).then(function (res) {
+                Dialog.alert(res.message, Page.back);
+            });
+        }
+    </script>
+</body>
+</html>
