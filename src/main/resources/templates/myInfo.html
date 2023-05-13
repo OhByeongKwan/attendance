@@ -14,9 +14,9 @@
         #editInfo input{background-color:#F5F5F5;padding:14px 0 14px 73px}
     </style>
 </head>
-<body>
+<body class="position-relative">
 <div class="mobile-container">
-    <div id="editForm" style="padding:20px">
+    <div id="editForm" style="padding:20px 20px 115px">
         <form id="editInfo" style="margin-top:65px">
             <div class="d-flex flex-column gap-3">
                 <input type="hidden" id="id" name="id">
@@ -36,8 +36,10 @@
 
     <footer>
         <div class="text-center position-absolute" style="bottom:60px;left:calc(50% - 27px)">
-            <img class="setting_circle" src="/image/setting_info.svg">
-            <i class="ri-settings-3-line" onclick="Page.go('')"></i>
+            <img class="setting_circle position-relative" src="/image/setting_info.svg">
+            <div class="position-absolute" onclick="Page.go('/logout')" style="width:30px;left:50%;right:50%;top:50%;transform:translate(-50%,-50%)">
+                <img src="/image/logout.svg">
+            </div>
         </div>
         <div style="display:flex;justify-content:space-around;margin-top: 20px;gap: 80px">
             <div role="button" onclick="Page.go('/main')"><img src="/image/home.svg"></div>
