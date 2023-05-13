@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AttendanceController {
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
     @GetMapping("/")
-    public String test() {return "/main";}
+    public String test() {return "main";}
 
     @GetMapping("/admin")
-    public String admin(){return "/admin";}
+    public String admin(){return "admin";}
 
     @GetMapping("/login")
-    public String login(){return "/login";}
+    public String login(){return "login";}
 
     @GetMapping("/main")
-    public String main(){return "/main";}
+    public String main(){return "main";}
 
     @GetMapping("/main2")
-    public String main2(){return "/main2";}
+    public String main2(){return "main2";}
 
     @GetMapping("/myInfo")
-    public String myInfo(){return "/myInfo";}
+    public String myInfo(){return "myInfo";}
 
 }
