@@ -16,7 +16,7 @@
 <body style="background-color:#FFB800">
     <div class="mobile-container">
         <div class="text-center">
-            <img style="margin-top:60px" src="/image/circle.svg">
+            <div class="main-logo d-flex justify-content-center" style="margin-top:50px"><img src="/image/logo.png" style="width:50%"></div>
         </div>
         <div id="signupForm">
             <div class="title text-center">SIGNUP</div>
@@ -26,6 +26,7 @@
                     <input name="status" type="hidden" value="0">
                 </div>
                 <button class="btn btn-warning" id="signUp" type="button" style="margin-top: 115px;background-color:#FFB800;width:100%" onclick="addUser()">등록</button>
+                <button class="btn" id="logout" type="button" style="margin-top: 20px;background-color:#31D28F;width:100%;color:white" onclick="Page.go('/logout')">로그아웃</button>
             </form>
         </div>
     </div>

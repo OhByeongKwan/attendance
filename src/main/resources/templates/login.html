@@ -13,14 +13,20 @@
         #loginUser input{background-color:#F5F5F5;padding:14px 0 14px 73px}
         #userId{background-image:url(/image/id_icon.svg);background-repeat:no-repeat;background-position:38px center}
         #userPw{background-image:url(/image/pw_icon.svg);background-repeat:no-repeat;background-position:43px center}
+        .mobile-container{opacity:0;transition: opacity 1s}
+        .main-logo{display:flex;align-items:center;justify-content:center;height:100vh;position:relative}
+        /*.main-logo.move{transition: top 1s;top:60px}*/
+        .main-logo>img{width:80%;position:absolute;top:50%;left:50%;transform:translate(-50%,-65%)}
+        .main-logo>img.move{position:absolute;top:130px;width:50%;transition:all 1s;z-index:1}
     </style>
 </head>
 <body style="background-color:#31D28F">
 <main>
+    <div class="main-logo"><img src="/image/logo.png"></div>
     <div class="mobile-container">
-        <div class="text-center">
-            <img style="margin-top:60px" src="/image/whitecircle.svg">
-        </div>
+<!--        <div class="text-center">-->
+<!--            <img style="margin-top:60px" src="/image/whitecircle.svg">-->
+<!--        </div>-->
         <div id="loginForm">
             <div class="title text-center">LOGIN</div>
             <form id="loginUser" action="/loginProc" method="post" style="margin-top:65px">
@@ -34,7 +40,6 @@
             </form>
         </div>
     </div>
-
 </main>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
@@ -42,6 +47,13 @@
 <script src="/js/core.js"></script>
 <script src="/js/axios.js"></script>
 <script>
+    $(document).ready(()=>{
+        setTimeout(()=>{
+            $('.main-logo').addClass('move');
+            $('.main-logo>img').addClass('move');
+            $('.mobile-container').css('opacity',1);
+        },800);
+    });
 </script>
 </body>
 </html>
