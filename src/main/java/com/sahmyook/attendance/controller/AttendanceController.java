@@ -28,4 +28,6 @@ public class AttendanceController {
     @GetMapping("/myInfo")
     public String myInfo(){return "myInfo";}
 
+    @GetMapping("/privacy")
+    public String privacy(){return "privacy";}
 }
