@@ -11,12 +11,35 @@
         #addUser input{background-color:#F5F5F5;padding:14px 0 14px 73px}
         #userId{background-image:url(/image/id_icon.svg);background-repeat:no-repeat;background-position:38px center}
         #userPw{background-image:url(/image/pw_icon.svg);background-repeat:no-repeat;background-position:43px center}
+
+        /* PC(해상도 768px ~ 1023px)*/
+        @media all and (min-width:1024px){
+            .main-logo>img{width:30%}
+        }
+        /* PC , 테블릿 가로 (해상도 768px ~ 1023px)*/
+        @media all and (min-width:768px) and (max-width:1023px) {
+            .main-logo>img{width:40%}
+        }
+
+        /* 테블릿 세로 (해상도 768px ~ 1023px)*/
+        @media all and (min-width:768px) and (max-width:1023px) {
+            .main-logo>img{width:40%}
+        }
+        /* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+        @media all and (min-width:480px) and (max-width:767px) {
+            .main-logo>img{width:40%}
+        }
+
+        /* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
+        @media all and (max-width:479px) {
+            .main-logo>img{width:50%}
+        }
     </style>
 </head>
 <body style="background-color:#FFB800">
     <div class="mobile-container">
         <div class="text-center">
-            <div class="main-logo d-flex justify-content-center" style="margin-top:50px"><img src="/image/logo.png" style="width:50%"></div>
+            <div class="main-logo d-flex justify-content-center" style="margin-top:50px"><img src="/image/logo.png"></div>
         </div>
         <div id="signupForm">
             <div class="title text-center">SIGNUP</div>
